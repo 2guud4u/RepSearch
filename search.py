@@ -1,4 +1,5 @@
 import re
+#TODO have global constant multipliers for the different words defined
 def sexbot(comment_body): 
     score = 0
     good_patt = re.compile(r'gl|good|\.*\sW\.*\s+|fire', re.IGNORECASE)
