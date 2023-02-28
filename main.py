@@ -1,6 +1,7 @@
 import praw
 import random
-r= praw.Reddit(
+from praw.models import MoreComments
+r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
     client_secret='5jOGVzfdgGJgRrxS7oPZAzaBZnndEA',
     password='Happyguy20031024',
@@ -23,8 +24,9 @@ def getRating(comments):
     return random.randint(0,10)
 post_list = []
 
+prompt = input('what do you want to search: \n')
 
-for s in r.subreddit("FashionReps").search(query="AJ1",
+for s in r.subreddit("FashionReps").search(query="prompt",
                                                    sort="relevance", 
                                                    limit=10, 
                                                    time_filter= "year"):
@@ -34,4 +36,5 @@ post_list.sort(key=sortRating)
 
 for s in post_list:
     print(str(s))
+
 
