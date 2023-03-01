@@ -1,6 +1,7 @@
 import praw
 import random
 from praw.models import MoreComments
+from search import sexbot
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
     client_secret='5jOGVzfdgGJgRrxS7oPZAzaBZnndEA',
@@ -15,24 +16,33 @@ class post:
         self.title = title
         self.wtc = wtc
     def __str__(self):
-        return f'Post name is {self.title} with rating {self.rating}\n'
+        return f'Post name is {self.title} with rating {self.rating} Link: {self.url}\n'
     
+
 def sortRating(s):
     return s.rating
 
 def getRating(comments):   
-    return random.randint(0,10)
+    rating = 0
+    comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
+    for comment in comments:
+        rating += sexbot(comment.body)
+    return rating
+
 post_list = []
 
 prompt = input('what do you want to search: \n')
 
-for s in r.subreddit("FashionReps").search(query="prompt",
+for s in r.subreddit("FashionReps").search(query=prompt,
                                                    sort="relevance", 
                                                    limit=10, 
                                                    time_filter= "year"):
-    post_list.append(post(s.permalink, getRating(s.comments), s.title, s.url))
+    post_list.append(post("https://www.reddit.com"+ s.permalink, 
+                          getRating(s.comments), 
+                          s.title, 
+                          s.url))
 
-post_list.sort(key=sortRating)
+post_list.sort(key=sortRating)#sort the post obj in order of rating
 
 for s in post_list:
     print(str(s))
