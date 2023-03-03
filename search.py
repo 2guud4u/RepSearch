@@ -1,7 +1,6 @@
 import re
-
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-def keywords(comment_body): 
+def sexbot(comment_body): 
     score = 0
     good_patt = re.compile(r'gl|good|\.*\sW\.*\s+|fire', re.IGNORECASE)
     bad_patt = re.compile(r'rl|\sbad|\soff|return', re.IGNORECASE)
@@ -9,7 +8,7 @@ def keywords(comment_body):
     bad = bad_patt.findall(comment_body)
     good_score = len(good)
     bad_score = len(bad)
-    score = good_score + bad_score
+    score = good_score - bad_score
     return(score)
 
 def sentiment_scores(comment_body):
@@ -28,7 +27,13 @@ def sentiment_scores(comment_body):
 
 
 
+<<<<<<< HEAD
 c = "man these shoes look ok u can see the stitches RL"
+=======
+c = "man these shoes look shit you can see the stitches RL"
+>>>>>>> 3bafb8383a229d6344b412ae9d1b3235ae9c8e17
 
 d = sentiment_scores(c)
+y = sexbot(c)
 print(d)
+print(y)
