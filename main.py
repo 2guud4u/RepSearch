@@ -1,7 +1,7 @@
 import praw
 import random
 from praw.models import MoreComments
-from search import sexbot
+from search import *
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
     client_secret='5jOGVzfdgGJgRrxS7oPZAzaBZnndEA',
@@ -27,7 +27,7 @@ def getRating(comments):
     rating = 0
     comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
     for comment in comments:
-        rating += (comment.body)
+        rating += sentiment_scores(comment.body)
     return rating
 
 post_list = []
@@ -36,7 +36,7 @@ prompt = input('what do you want to search: \n')
 
 for s in r.subreddit("FashionReps").search(query=prompt,
                                                    sort="relevance", 
-                                                   limit=1, 
+                                                   limit=10, 
                                                    time_filter= "year"):
     post_list.append(post("https://www.reddit.com"+ s.permalink, 
                           getRating(s.comments), 

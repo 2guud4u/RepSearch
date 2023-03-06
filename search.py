@@ -16,24 +16,15 @@ def sentiment_scores(comment_body):
     # creates SentimentIntensityAnalyzer object
     sid_obj = SentimentIntensityAnalyzer()
     scores = sid_obj.polarity_scores(comment_body)
-    if scores['compound'] >= 0.05:
-        return("Positive")
+    if scores['compound'] >= 0.05: #positive
+        return 1
  
-    elif scores['compound'] <= - 0.05:
-        return("Negative")
+    elif scores['compound'] <= - 0.05: #negative
+        return -1
  
     else:
-        return("Neutral")
+        return 0    #neutral
 
 
 
-<<<<<<< HEAD
-c = "man these shoes look ok u can see the stitches RL"
-=======
-c = "man these shoes look shit you can see the stitches RL"
->>>>>>> 3bafb8383a229d6344b412ae9d1b3235ae9c8e17
 
-d = sentiment_scores(c)
-y = sexbot(c)
-print(d)
-print(y)
