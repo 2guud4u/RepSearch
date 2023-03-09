@@ -2,6 +2,7 @@ import praw
 import random
 from praw.models import MoreComments
 from search import *
+#TODO change login into oauth instead of password
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
     client_secret='5jOGVzfdgGJgRrxS7oPZAzaBZnndEA',
@@ -33,7 +34,7 @@ def getRating(comments):
 post_list = []
 
 prompt = input('what do you want to search: \n')
-
+#grabs posts based on prompt
 for s in r.subreddit("FashionReps").search(query=prompt,
                                                    sort="relevance", 
                                                    limit=10, 
