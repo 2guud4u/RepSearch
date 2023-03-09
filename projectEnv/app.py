@@ -8,8 +8,10 @@ app = Flask(__name__)
 def results():
     if request.method == "POST":
         searchVal = request.form.get("sVal")
-        result=str(searchItem(searchVal)[-1])
-   
+        
+        result=searchItem(searchVal)
+        
+        
     return render_template("results.html", result=result)
 
 @app.route("/")

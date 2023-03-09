@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    {% if result %}
-    <h1>{{result}}</h1>
-    {% endif %}
+    {% for d in result %}
+    <li>
+        <div>{{d.title}}</div>
+        <a href="{{d.url}}">Reddit Link</a>
+        <div>This post has rating of {{d.rating}}</div>
+    </li>
+    <div>&nbsp;</div>
+    {% endfor %}
 
 </body>
 </html>
