@@ -43,6 +43,6 @@ def searchItem(prompt):
                             s.title, 
                             s.url))
 
-    post_list.sort(key=sortRating)#sort the post obj in order of rating
-
+    post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
+    
     return post_list
