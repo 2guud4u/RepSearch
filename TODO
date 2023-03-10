@@ -1,2 +1,10 @@
 make praw auth instead of password
 make search faster? idk how but pls
+
+figure out what is takes the longest in prawing:
+answer most of the time was spent on evaluating each post for rating
+ex. 
+
+time for reddit api was 4.213782072067261 and the time for eval was 12.170827150344849
+
+time for reddit api was 3.018631935119629 and the time for eval was 19.37183403968811

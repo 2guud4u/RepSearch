@@ -2,6 +2,7 @@ import praw
 import random
 from praw.models import MoreComments
 from search import *
+import time
 #TODO change login into oauth instead of password
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
@@ -30,23 +31,24 @@ def getRating(comments):
     for comment in comments:
         rating += sentiment_scores(comment.body)
     return rating
-
+start_time = time.time() # to test what time is taking the longest
 post_list = []
 
 prompt = input('what do you want to search: \n')
 #grabs posts based on prompt
-for s in r.subreddit("FashionReps").search(query=prompt,
+posts = r.subreddit("FashionReps").search(query=prompt,
                                                    sort="relevance", 
-                                                   limit=10, 
-                                                   time_filter= "year"):
+                                                   limit=5, 
+                                                   time_filter= "year")
+end_time_for_api = time.time()
+for s in posts:
     post_list.append(post("https://www.reddit.com"+ s.permalink, 
                           getRating(s.comments), 
                           s.title, 
                           s.url))
-
+end_time_for_eval = time.time()
 post_list.sort(key=sortRating)#sort the post obj in order of rating
+print(f"time for reddit api was {end_time_for_api-start_time} and the time for eval was {end_time_for_eval-start_time}")
 
-for s in post_list:
-    print(str(s))
 
 

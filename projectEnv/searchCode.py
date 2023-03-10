@@ -36,7 +36,7 @@ def searchItem(prompt):
     #grabs posts based on prompt
     for s in r.subreddit("FashionReps").search(query=prompt,
                                                     sort="relevance", 
-                                                    limit=10, 
+                                                    limit=5, 
                                                     time_filter= "year"):
         post_list.append(post("https://www.reddit.com"+ s.permalink, 
                             getRating(s.comments), 
