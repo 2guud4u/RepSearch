@@ -1,14 +1,11 @@
 import praw
-import random
 from praw.models import MoreComments
 from search import *
 #TODO change login into oauth instead of password
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
     client_secret='5jOGVzfdgGJgRrxS7oPZAzaBZnndEA',
-    password='Happyguy20031024',
     user_agent="smol man",
-    username='fake_t4xi'
 )
 #post object
 class post:

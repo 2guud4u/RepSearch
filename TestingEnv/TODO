@@ -1,0 +1,13 @@
+1.make praw auth instead of password
+
+
+2.some how decrease algorthimn analysis time
+answer most of the time was spent on evaluating each post for rating
+ex. 
+
+time for reddit api was 4.213782072067261 and the time for eval was 12.170827150344849
+
+time for reddit api was 3.018631935119629 and the time for eval was 19.37183403968811
+
+3. search through other rep reddits like r/qualityreps, r/repsneakers if it is a shoe
+
