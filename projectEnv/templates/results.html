@@ -3,17 +3,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Qc Results</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style/results.css')}}">
 </head>
 <body>
-    {% for d in result %}
-    <li>
-        <div>{{d.title}}</div>
-        <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">Reddit Link</a>
-        <div>This post has rating of {{d.rating}}</div>
-    </li>
-    <div>&nbsp;</div>
-    {% endfor %}
-
+    <div class="resultsContainer">
+        {% for d in result %}
+        <div>
+            <div>{{d.title}}</div>
+            <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">Reddit Link</a>
+            <div>This post has rating of {{d.rating}}</div>
+        </div>
+        <div>&nbsp;</div>
+        {% endfor %}
+    </div>
 </body>
 </html>

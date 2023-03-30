@@ -1,15 +1,45 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Rep Search Time</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
-  <body>
-    
-    <py-config>
-      packages = ["matplotlib", "pandas"]
-    </py-config>
+<head>
+	<title>Search Bar</title>
+	<style>
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 
-  </body>
+		input[type="text"] {
+			width: 300px;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 4px;
+			font-size: 16px;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+<body>
+	<form action="search-results.php" method="get">
+		<label for="search-input">Search:</label>
+		<input type="text" id="search-input" name="search-input">
+		<input type="submit" value="Search">
+	</form>
+</body>
 </html>
