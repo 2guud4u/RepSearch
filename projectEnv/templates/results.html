@@ -7,12 +7,21 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style/results.css')}}">
 </head>
 <body>
-    <div class="resultsContainer">
+    <div class="product-row">
         {% for d in result %}
-        <div>
-            <div>{{d.title}}</div>
-            <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">Reddit Link</a>
-            <div>This post has rating of {{d.rating}}</div>
+        <div class="product">
+            <h2>{{d.title}}</h2>
+            <p>This post has rating of {{d.rating}}</p>
+            <div class="button-container">
+                <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
+                    <button class="reddit">Reddit</button>
+                </a>
+                <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
+                    <button class="wtc">WTC</button>
+                </a>
+            </div>
+            
+
         </div>
         <div>&nbsp;</div>
         {% endfor %}

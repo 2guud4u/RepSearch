@@ -1,6 +1,62 @@
-.resultsContainer {
+.product {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex-basis: 30%;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+.product h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+.product p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+.product-row {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    padding: 20px;
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+.wtc {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.reddit {
+    background-color: #dd5634;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+body {
+    background-color:black;
+    background-size: cover;
+    color: blue;
 }

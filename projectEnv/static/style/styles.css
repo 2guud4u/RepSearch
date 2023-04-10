@@ -11,9 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
-    
-}
+    }
 .bar {
     padding: 10px;
     border: none;
@@ -44,3 +42,4 @@ body {
     background-color:#e1c8ff;
     border-color: #e1c8ff; 
 }
+
