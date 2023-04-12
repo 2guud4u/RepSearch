@@ -10,8 +10,10 @@ def results():
         searchVal = request.form.get("sVal")
         
         result=searchItem(searchVal)
-        
-        
+        #if no results
+        if len(result) == 0:
+            return render_template("empty.html", searchVal=searchVal)
+        #load results.hmtl
     return render_template("results.html", result=result)
 
 @app.route("/")

@@ -1,0 +1,49 @@
+body {
+    background-color:black;
+    background-size: cover;
+    color: white;
+}
+.center {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+img {
+    max-width: 20em;
+    height: auto;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.flash-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    animation: flash 1s infinite;
+  }
+  
+  @keyframes flash {
+    .001% {
+      background-color: yellow;
+      color: black;
+    }
+  }
