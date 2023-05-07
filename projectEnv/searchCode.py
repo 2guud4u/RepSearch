@@ -1,6 +1,8 @@
 import praw
 from praw.models import MoreComments
 from search import *
+
+
 #TODO change login into oauth instead of password
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
@@ -9,13 +11,14 @@ r = praw.Reddit(
 )
 #post object
 class post:
-    def __init__(self, url, rating, title, wtc):
+    def __init__(self, url, rating, title, wtc, post_id):
         self.url = url
         self.rating = rating
         self.title = title
         self.wtc = wtc 
+        self.post_id = post_id
     def __str__(self):
-        return f'Post name is {self.title} with rating {self.rating} Link: {self.url}\n'
+        return f'Post name is {self.title} with rating {self.rating} Link: {self.url} id: {self.url}\n'
     
 
 def sortRating(s):
@@ -38,7 +41,7 @@ def searchItem(prompt):
         post_list.append(post("https://www.reddit.com"+ s.permalink, 
                             getRating(s.comments), 
                             s.title, 
-                            s.url))
+                            s.url, s.id))
 
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
     

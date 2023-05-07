@@ -13,13 +13,14 @@ r = praw.Reddit(
 
 #post object
 class post:
-    def __init__(self, url, rating, title, wtc):
+    def __init__(self, url, rating, title, wtc, id):
         self.url = url
         self.rating = rating
         self.title = title
-        self.wtc = wtc 
+        self.wtc = wtc
+        self.post_id = id 
     def __str__(self):
-        return f'Post name is {self.title} with rating {self.rating} Link: {self.url}\n'
+        return f'Post name is {self.title} with rating {self.rating} Link: {self.url} id: {self.post_id}\n'
     
 
 def sortRating(s):
@@ -47,9 +48,11 @@ for s in posts:
     post_list.append(post("https://www.reddit.com"+ s.permalink, 
                           getRating(s.comments), 
                           s.title, 
-                          s.url))
+                          s.url, s.id))
 end_time_for_eval = time.time()
 post_list.sort(key=sortRating)#sort the post obj in order of rating
+for i in post_list:
+    print(i)
 print(f"time for reddit api was {end_time_for_api-start_time} and the time for eval was {end_time_for_eval-start_time}")
 
 
