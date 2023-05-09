@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="banner"> 
-        <a href="#" id="goBack">Go Back</a>
+        <a href="{{ url_for('index') }}" id="goBack">Go Back</a>
         <h1 id="title">Search Results</h1>
         </div>
     <div class="search-container">
@@ -92,11 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const goBackLink = document.getElementById('goBack');
-goBackLink.addEventListener('click', function(event) {
-  event.preventDefault(); // prevent default behavior
-  window.location.href = 'http://127.0.0.1:8000'; // navigate to desired page
-});
+// const goBackLink = document.getElementById('goBack');
+// goBackLink.addEventListener('click', function(event) {
+//   event.preventDefault(); // prevent default behavior
+//   window.location.href = 'http://127.0.0.1:8000'; // navigate to desired page
+// });
 
 
 </script>
