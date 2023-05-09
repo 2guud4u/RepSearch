@@ -45,6 +45,7 @@ function truncateTitle(title) {
     const words = title.textContent.split(' ');
 
     title.style.whiteSpace = 'nowrap';
+    title.textContent = words[0];
 
     for (let i = 1; i < words.length; i++) {
         const testTitle = title.textContent + ' ' + words[i];
