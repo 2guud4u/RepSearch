@@ -69,16 +69,16 @@ def searchItem(db,prompt):
     #purge old processed_ids and posts
     processed_ids.clear()
     post_list.clear()
-
+    
     #grabs posts based on prompt
     for s in r.subreddit("FashionReps").search(query=prompt,
                                                     sort="relevance", 
                                                     limit=6, 
                                                     time_filter= "year"):
         addToPosts(s)
-        print("adding to post")
+        
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
-    print(post_list)
+   
     return post_list
 
 def loadMore():
