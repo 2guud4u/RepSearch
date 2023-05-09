@@ -74,7 +74,7 @@ def searchItem(db,prompt):
                                                     sort="relevance", 
                                                     limit=6, 
                                                     time_filter= "year"):
-        addToPosts()
+        addToPosts(p_data)
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
     return post_list
 
