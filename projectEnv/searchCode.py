@@ -61,7 +61,6 @@ def addToPosts(p_data):
                             p_data.id, 
                             cached))
 
-        post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
     
 def searchItem(db,prompt):
     cur_prompt = prompt
