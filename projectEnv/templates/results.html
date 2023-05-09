@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="banner"> 
-        <a href="#" id="goBack">Go Back</a>
+        <a href="{{ url_for('index') }}" id="goBack">Go Back</a>
         <h1 id="title">Search Results</h1>
         </div>
     <div class="search-container">
@@ -61,6 +61,7 @@ let button = document.getElementById('toggle-button');
 function toggleTitle(button) {
     const title = button.previousElementSibling;
     const productTop = title.parentElement;
+    const product = productTop.parentElement;
     const expanded = title.classList.contains('expanded');
 
     if (expanded) {
@@ -81,6 +82,7 @@ function toggleTitle(button) {
         button.style.paddingBottom = '6.5px';
         button.style.height = `${button.offsetHeight -50}px`;
         productTop.style.height = productTop.scrollHeight + 'px';
+
     }
 }
 
@@ -91,12 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
         title.setAttribute('data-full-title', title.textContent);
         truncateTitle(title);
     });
-});
-
-const goBackLink = document.getElementById('goBack');
-goBackLink.addEventListener('click', function(event) {
-  event.preventDefault(); // prevent default behavior
-  window.location.href = 'http://127.0.0.1:8000'; // navigate to desired page
 });
 
 </script>

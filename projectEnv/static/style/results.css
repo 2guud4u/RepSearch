@@ -62,13 +62,13 @@ html, body {
     flex-basis: 30%;
     margin: 10px;
     padding: 12px;
-    min-height: 150px;
-    min-width: 150px;
     text-align: center;
     position: relative;
     box-sizing: border-box;
     display: grid;
     grid-template-rows: auto 1fr 1fr;
+    min-height: 150px;
+    height: 100%;
 }
 .product-top,
 .product-middle,
@@ -85,6 +85,7 @@ html, body {
     padding-top: 0;
     padding-bottom: 0;
     max-height: 53px;
+
 }
 
 .product-bottom {
