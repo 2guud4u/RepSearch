@@ -68,7 +68,7 @@ def searchItem(db,prompt):
     
     #purge old processed_ids and posts
     processed_ids.clear()
-    
+    post_list.clear()
 
     #grabs posts based on prompt
     for s in r.subreddit("FashionReps").search(query=prompt,
