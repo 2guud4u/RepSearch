@@ -1,20 +1,129 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* added this line */
+    background-color: rgb(227, 227, 227);
+    color: rgb(24, 24, 26);
+    font-size: 20px;
+    padding-top: 0px;
+    padding: 10px;
+    font-weight: bold;
+    border: 6px solid;
+    border-color: rgb(21, 25, 35);
+    margin: 0 auto;
+}
+
+.banner::before {
+    content: ""; /* added this block */
+    position: absolute;
+    right: 0;
+    width: 10px; /* adjust as needed */
+    height: 100%;
+}
+
+#title {
+    text-align: center;
+    margin: 0;
+}
+
+#goback {
+    position: absolute; /* added this line */
+    left: 9px; /* added this line */
+    padding: 3px 6px;
+    background-color: rgb(68, 76, 95);
+    border: 3px solid;
+    border-color: rgb(28, 27, 35);
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.search-container {
+    background-color: rgb(58, 65, 83);
+    border-radius: 5px;
+    display: block;
+    border: 6px solid;
+    border-color: rgb(21, 25, 35);
+}
+
 .product {
     background-color: #f0f0f0;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     flex-basis: 30%;
     margin: 10px;
-    padding: 20px;
+    padding: 12px;
+    height: 170px;
+    width: 150px;
     text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr 1.2fr;
 }
+
+.product-top,
+.product-middle,
+.product-bottom {
+    overflow: hidden;
+}
+.product-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(226, 225, 229);
+    border-radius: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.product-bottom {
+   max-height: 30px;
+}
+
 .product img {
     max-width: 100%;
     height: auto;
 }
-.product h2 {
-    font-size: 1.5em;
-    margin: 10px 0;
+
+.product-title {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+    line-height: 1.1em;
+    max-height: 2.2em;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 5px;
+    margin-right: 35px;
 }
+
+.product-top,
+.product-title,
+h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.product-title.expanded {
+    white-space: normal;
+    margin-right: 20px;
+}
+
+
 .product p {
     font-size: 1.2em;
     margin: 10px 0;
@@ -23,11 +132,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
 }
 .button-container{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0 20px;
 }
 .wtc {
     background-color: #4CAF50;
@@ -35,7 +150,6 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     border: none;
@@ -48,15 +162,52 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 body {
-    background-color:black;
-    background-size: cover;
-    color: blue;
+    background-color:rgb(0, 0, 0);
+    color: rgb(19, 19, 132);
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.toggle-button {
+    position: absolute;
+    right: 0;
+    background-color: rgb(198, 209, 230);
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+    height: 15px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 1;
+    padding-bottom: 9.5px;
+    margin-right: 3px;
+}
+
+
+#rating {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#end {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 0px;
+    text-decoration: underline;
 }
