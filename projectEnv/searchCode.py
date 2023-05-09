@@ -3,7 +3,11 @@ from praw.models import MoreComments
 from search import *
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from praw.models.util import stream_generator
 
+cur_prompt=""
+processed_ids = set()
+post_list = []
 
 #TODO change login into oauth instead of password
 r = praw.Reddit(
@@ -41,27 +45,53 @@ def getRating(comments):
     for comment in comments:
         rating += sentiment_scores(comment.body)
     return rating
+def addToPosts(p_data):
+#look for cached data
+        cached= True
+        rating = get_data_if_exist(p_data.id)    
+        if rating == False:
+            rating = getRating(p_data.comments)
+            cached = False
+        #add to processed post
+        processed_ids.add(p_data.id)
+        post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
+                            rating, 
+                            p_data.title, 
+                            p_data.url, 
+                            p_data.id, 
+                            cached))
+
+        post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
+    
 def searchItem(db,prompt):
-    post_list = []
+    cur_prompt = prompt
+    
+    #purge old processed_ids
+    processed_ids.clear()
 
     #grabs posts based on prompt
     for s in r.subreddit("FashionReps").search(query=prompt,
                                                     sort="relevance", 
-                                                    limit=5, 
+                                                    limit=6, 
                                                     time_filter= "year"):
-        #look for cached data
-        cached= True
-        rating = get_data_if_exist(s.id)    
-        if rating == False:
-            rating = getRating(s.comments)
-            cached = False
-        post_list.append(post("https://www.reddit.com"+ s.permalink, 
-                            rating, 
-                            s.title, 
-                            s.url, 
-                            s.id, 
-                            cached))
-
+        addToPosts()
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
-    
+    return post_list
+
+def loadMore():
+    #add 6 more
+    newNum = 0
+    while(newNum >= 6):
+        for post in stream_generator(r.subreddit("FashionReps").search(query=cur_prompt,
+                                                                    sort="relevance", 
+                                                                    limit=1, 
+                                                                    time_filter= "year")
+                                                        , skip_existing=True):
+            if post.id not in processed_ids:
+                # Process the post here
+                addToPosts(post)
+                newNum += 1
+        
+        break      
+    post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
     return post_list

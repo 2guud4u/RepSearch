@@ -16,19 +16,21 @@
         {% for d in result %}
         <div class="product">
             <div class="product-top">
-            <h2 class="product-title">{{d.title}}</h2><button class="toggle-button" onclick="toggleTitle(this)">...</button></div>
+                <h2 class="product-title">{{d.title}}</h2>
+                <button class="toggle-button" onclick="toggleTitle(this)">...</button>
+            </div>
             <p class="product-middle" id="rating">Rating: {{d.rating}}</p>
             <div class="product-bottom">
-            <div class="button-container">
-                <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
-                    <button class="reddit">Reddit</button>
-                </a>
-                <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
-                    <button class="wtc">WTC</button>
-                </a>
+                <div class="button-container">
+                    <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
+                        <button class="reddit">Reddit</button>
+                    </a>
+                    <a href="{{d.url}}" target="_blank" rel="noopener noreferrer">
+                        <button class="wtc">WTC</button>
+                    </a>
+                </div>
             </div>
-            </div>
-            </div>
+        </div>
         
         <div>&nbsp;</div>
         {% endfor %}
