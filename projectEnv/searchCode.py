@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from praw.models.util import stream_generator
 
-cur_prompt=""
+cur_prompt= ""
 processed_ids = set()
 post_list = []
 
@@ -47,27 +47,28 @@ def getRating(comments):
     return rating
 def addToPosts(p_data):
 #look for cached data
-        cached= True
-        rating = get_data_if_exist(p_data.id)    
-        if rating == False:
-            rating = getRating(p_data.comments)
-            cached = False
-        #add to processed post
-        processed_ids.add(p_data.id)
-        post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
-                            rating, 
-                            p_data.title, 
-                            p_data.url, 
-                            p_data.id, 
-                            cached))
+    cached= True
+    rating = get_data_if_exist(p_data.id)    
+    if rating == False:
+        rating = getRating(p_data.comments)
+        cached = False
+    #add to processed post
+    processed_ids.add(p_data.id)
+    post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
+                        rating, 
+                        p_data.title, 
+                        p_data.url, 
+                        p_data.id, 
+                        cached))
 
     
 def searchItem(db,prompt):
+
     cur_prompt = prompt
     
     #purge old processed_ids and posts
     processed_ids.clear()
-    post_list = []
+    
 
     #grabs posts based on prompt
     for s in r.subreddit("FashionReps").search(query=prompt,
@@ -75,7 +76,9 @@ def searchItem(db,prompt):
                                                     limit=6, 
                                                     time_filter= "year"):
         addToPosts(s)
+        print("adding to post")
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
+    print(post_list)
     return post_list
 
 def loadMore():
