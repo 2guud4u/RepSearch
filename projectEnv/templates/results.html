@@ -70,6 +70,7 @@ function toggleTitle(button) {
         button.style.paddingTop = '1px';
         button.style.paddingBottom = '9.5px';
         button.style.height = `${button.offsetHeight -8.5}px`;
+        productTop.style.height = 'auto'; 
 
     } else {
         title.style.whiteSpace = 'normal';
@@ -97,7 +98,6 @@ goBackLink.addEventListener('click', function(event) {
   event.preventDefault(); // prevent default behavior
   window.location.href = 'http://127.0.0.1:8000'; // navigate to desired page
 });
-
 
 </script>
 </html>
