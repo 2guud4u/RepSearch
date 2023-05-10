@@ -67,7 +67,7 @@ html, body {
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr 1fr;
-    min-height: 165tpx;
+    min-height: 165px;
     height: 100%;
 }
 .product-top,
