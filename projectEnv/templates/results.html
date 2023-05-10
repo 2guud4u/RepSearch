@@ -11,10 +11,10 @@
         <a href="{{ url_for('index') }}" id="goBack">Go Back</a>
         <h1 id="title">Search Results</h1>
         </div>
-    <div class="search-container">
-    <div class="product-row">
-        {% for d in result %}
-        <div class="product">
+        <div class="search-container">
+        <div class="product-row">
+            {% for d in result %}
+         <div class="product">
             <div class="product-top">
                 <h2 class="product-title">{{d.title}}</h2>
                 <button class="toggle-button" onclick="toggleTitle(this)">...</button>
@@ -30,11 +30,13 @@
                     </a>
                 </div>
             </div>
-        </div>
+         </div>
         
         <div>&nbsp;</div>
         {% endfor %}
     </div>
+    <div class="button-container2">
+    <button id="load-more">Load More</button></div>
    </div>
    <p id="end">End of Search Results</p>
 </div>
@@ -42,50 +44,48 @@
 <script>
 
 function truncateTitle(title) {
+    // Get the computed line-height of the title
     const lineHeight = parseFloat(getComputedStyle(title).lineHeight);
-    const maxHeight = lineHeight * 2;
-    const words = title.textContent.split(' ');
 
-    title.style.whiteSpace = 'nowrap';
-    title.textContent = words[0];
-
-    for (let i = 1; i < words.length; i++) {
-        const testTitle = title.textContent + ' ' + words[i];
-        title.textContent = testTitle;
-        if (title.offsetHeight > maxHeight) {
-            title.textContent = title.textContent.substr(0, title.textContent.lastIndexOf(words[i])) + '...';
-            break;
-        }
+    // Check if the title's scrollHeight is greater than twice the line-height
+    if (title.scrollHeight > lineHeight * 3) {
+        // If it is, the title is exceeding two lines, so add the 'truncated' class
+        title.classList.add('truncated');
     }
 }
-
-let button = document.getElementById('toggle-button');
 
 function toggleTitle(button) {
     const title = button.previousElementSibling;
     const productTop = title.parentElement;
     const product = productTop.parentElement;
     const expanded = title.classList.contains('expanded');
+    const lineHeight = parseFloat(getComputedStyle(title).lineHeight);
 
     if (expanded) {
         truncateTitle(title);
-        title.classList.remove('expanded');
         button.textContent = '...';
+        title.classList.remove('expanded');
+        productTop.classList.remove('expanded');
         button.style.paddingTop = '1px';
         button.style.paddingBottom = '9.5px';
         button.style.height = `${button.offsetHeight -8.5}px`;
-        productTop.style.height = 'auto'; 
-
+        product.style.height = "auto";
+        productTop.style.height = "auto";
+        productTop.style.zIndex = "1";
+        title.style.maxHeight = `${lineHeight * 2}px`;
+        productTop.style.height = `${lineHeight * 2}px`;
     } else {
         title.style.whiteSpace = 'normal';
-        title.textContent = title.getAttribute('data-full-title');
         title.classList.add('expanded');
+        productTop.classList.add('expanded');
         button.textContent = '-';
         button.style.paddingTop = '3.5px';
         button.style.paddingBottom = '6.5px';
-        button.style.height = `${button.offsetHeight -50}px`;
-        productTop.style.height = productTop.scrollHeight + 'px';
-
+        button.style.height = `${button.offsetHeight -50}px`;   
+        productTop.style.zIndex = "900";
+        productTop.style.height = "auto"
+        title.style.maxHeight = `${lineHeight * 6}px`;
+        productTop.style.maxHeight = `${lineHeight * 6}px`;
     }
 }
 
@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         truncateTitle(title);
     });
 });
+
 
 </script>
 </html>
