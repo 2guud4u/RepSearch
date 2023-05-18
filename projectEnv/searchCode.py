@@ -6,9 +6,9 @@ from datetime import datetime
 from praw.models.util import stream_generator
 
 cur_prompt= ""
-processed_ids = set()
-post_list = []
 
+post_list = []
+total_post_list = []
 #TODO change login into oauth instead of password
 r = praw.Reddit(
     client_id='jknOULmDh_Xkmi5xLSpl_A',
@@ -52,8 +52,9 @@ def addToPosts(p_data):
     if rating == False:
         rating = getRating(p_data.comments)
         cached = False
+        print("not cached")
     #add to processed post
-    processed_ids.add(p_data.id)
+    
     post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
                         rating, 
                         p_data.title, 
@@ -67,14 +68,17 @@ def searchItem(db,prompt):
     cur_prompt = prompt
     
     #purge old processed_ids and posts
-    processed_ids.clear()
-    post_list.clear()
     
+    post_list.clear()
+    total_post_list.clear()
     #grabs posts based on prompt
-    for s in r.subreddit("FashionReps").search(query=prompt,
+    for i in r.subreddit("FashionReps").search(query=prompt,
                                                     sort="relevance", 
-                                                    limit=6, 
+                                                    limit=24, 
                                                     time_filter= "year"):
+        total_post_list.append(i)
+    #add first 6 posts
+    for s in total_post_list[:6]:
         addToPosts(s)
         
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
@@ -83,18 +87,12 @@ def searchItem(db,prompt):
 
 def loadMore():
     #add 6 more
-    newNum = 0
-    while(newNum >= 6):
-        for post in stream_generator(r.subreddit("FashionReps").search(query=cur_prompt,
-                                                                    sort="relevance", 
-                                                                    limit=1, 
-                                                                    time_filter= "year")
-                                                        , skip_existing=True):
-            if post.id not in processed_ids:
-                # Process the post here
-                addToPosts(post)
-                newNum += 1
-        
-        break      
+    #remove previous 6
+    del total_post_list[:6]
+    for s in total_post_list[:6]:
+        print("loaded one")
+        addToPosts(s)
+
+    
     post_list.sort(key=sortRating, reverse = True)#sort the post obj in order of rating
     return post_list

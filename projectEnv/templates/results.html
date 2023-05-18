@@ -35,8 +35,9 @@
         <div>&nbsp;</div>
         {% endfor %}
     </div>
-    <div class="button-container2">
-    <button id="load-more">Load More</button></div>
+        <form action="{{ url_for('results') }}" class="button-container2"  method="post">
+            <button  name="fromResults" id="load-more">Load More</button>
+        </form>
    </div>
    <p id="end">End of Search Results</p>
 </div>
