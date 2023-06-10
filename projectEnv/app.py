@@ -38,7 +38,7 @@ def results():
             #if no results
             if len(result) == 0:
                 return render_template("empty.html", searchVal=searchVal)
-    if "fromResults" in info:
+    if "fromResults" in request.form:
         result = loadMore()
     #store info into database
     date = datetime.now().time()
