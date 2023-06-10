@@ -34,6 +34,7 @@ def get_data_if_exist(p_key):
     if record is not None:
         return record.score
     else:
+        print("not found", p_key)
         return False
     
 def sortRating(s):
@@ -50,6 +51,7 @@ def addToPosts(p_data):
     cached= True
     rating = get_data_if_exist(p_data.id)    
     if rating == False:
+        print("getting ratings", p_data.id)
         rating = getRating(p_data.comments)
         cached = False
         print("not cached")
@@ -65,7 +67,7 @@ def addToPosts(p_data):
     
 def searchItem(db,prompt):
 
-    cur_prompt = prompt
+    
     
     #purge old processed_ids and posts
     
@@ -78,6 +80,7 @@ def searchItem(db,prompt):
                                                     time_filter= "year"):
         total_post_list.append(i)
     #add first 6 posts
+    print("looked for posts")
     for s in total_post_list[:6]:
         addToPosts(s)
         
