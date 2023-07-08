@@ -68,9 +68,3 @@ def loading():
     session['form_data'] = request.form
     
     return render_template("loading.html", gifList=gifList)
-
-
-
-
-
-
