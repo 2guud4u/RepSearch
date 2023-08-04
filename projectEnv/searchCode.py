@@ -67,8 +67,6 @@ def addToPosts(p_data):
     
 def searchItem(db,prompt):
 
-    
-    
     #purge old processed_ids and posts
     
     post_list.clear()

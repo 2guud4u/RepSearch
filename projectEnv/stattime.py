@@ -23,9 +23,12 @@ for i in r.subreddit("FashionReps").search(query=prompt,
 
 
 print(len(plist))
+# all the averaged values for 100 post
 average_upvotes = sum(upvotes for upvotes, _ in plist) / len(plist)
 average_comments = sum(comments for _, comments in plist) / len(plist)
 average_score = sum(listyy) / len(listyy)
+
+
 
 print(f"average score is {average_score}")
 print(f"Average number of upvotes for posts with '{len(plist)}' posts: {average_upvotes}")
