@@ -30,4 +30,12 @@ def sexbot(comment_body):
     score = good_score - bad_score
     return(score)
 
+def linreg():
+    # creates  score for a post based on the linear relation 
+    # between the comments and the average number of upvotes for a QC post
+    sd = 28.6
+    m = 2.59
+    int = 5.85
+
+    
 
