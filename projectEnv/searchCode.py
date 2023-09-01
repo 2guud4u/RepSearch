@@ -40,12 +40,17 @@ def get_data_if_exist(p_key):
 def sortRating(s):
     return s.rating
 
-def getRating(comments):   
+def getRating(prpost):   
     rating = 0
-    comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
-    for comment in comments:
+    prpost.comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
+    # rating from the comment lin reg
+    baserate = linreg(prpost)
+    for comment in prpost.comments:
         rating += sentiment_scores(comment.body)
-    return rating
+        return rating
+
+
+
 def addToPosts(p_data):
 #look for cached data
     cached= True
@@ -67,7 +72,7 @@ def addToPosts(p_data):
     
 def searchItem(db,prompt):
 
-    #purge old processed_ids and posts
+    # purge old processed_ids and posts
     
     post_list.clear()
     total_post_list.clear()

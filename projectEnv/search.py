@@ -18,7 +18,7 @@ def sentiment_scores(comment_body):
     else:
         return 0    #neutral
 
-def sexbot(comment_body): 
+def regbot(comment_body): 
     score = 0
     good_patt = re.compile(r'gl|good|\.*\sW\.*\s+|fire', re.IGNORECASE)
     bad_patt = re.compile(r'rl|\sbad|\soff|return', re.IGNORECASE)
@@ -30,12 +30,17 @@ def sexbot(comment_body):
     score = good_score - bad_score
     return(score)
 
-def linreg():
+def linreg(submission):
     # creates  score for a post based on the linear relation 
     # between the comments and the average number of upvotes for a QC post
     sd = 28.6
     m = 2.59
     int = 5.85
+    c = m * submission.score + int
+    return(c/sd)
+
+
+
 
     
 
