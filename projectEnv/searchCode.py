@@ -42,12 +42,24 @@ def sortRating(s):
 
 def getRating(prpost):   
     rating = 0
+    sentimentrating = 0 
+    sentind = 0
     prpost.comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
     # rating from the comment lin reg
     baserate = linreg(prpost)
+
     for comment in prpost.comments:
-        rating += sentiment_scores(comment.body)
-        return rating
+        sentimentrating += sentiment_scores(comment.body)
+        sentind = sentind + 1
+    
+    rating = baserate * ((sentimentrating / sentind) + 1) 
+
+
+    # temp checks
+    print("base", baserate)
+    print("sentimentrating", sentimentrating/sentind)
+    
+    return rating
 
 
 
@@ -57,7 +69,7 @@ def addToPosts(p_data):
     rating = get_data_if_exist(p_data.id)    
     if rating == False:
         print("getting ratings", p_data.id)
-        rating = getRating(p_data.comments)
+        rating = getRating(p_data)
         cached = False
         print("not cached")
     #add to processed post
