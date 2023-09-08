@@ -19,31 +19,29 @@ img {
 }
 
 .button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  width: 120px;
+  cursor: pointer;
+  margin: 5px;
+  animation: aura 5s infinite;
 }
 
-.flash-button {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    animation: flash 1s infinite;
-  }
-  
-  @keyframes flash {
-    .001% {
-      background-color: yellow;
-      color: black;
-    }
-  }
+@keyframes aura {
+  0% { background-color: #c33232; }
+  20% { background-color: #f1f436; }
+  40% { background-color: #62e20d; }
+  60% { background-color: #3bfffc; }
+  80% { background-color: #514caf; }
+  100% { background-color: #a34caf; }
+}
+
+.button:hover {
+  animation: none;
+}

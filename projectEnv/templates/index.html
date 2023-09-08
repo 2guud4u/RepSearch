@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QcRepSite</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style/index.css')}}">
 </head>
 <body>
     
@@ -13,7 +13,7 @@
         <form  class="searchCont" action="{{ url_for('loading')}}" method="post">
 
             <input class="bar" type="text" id="searchVal" name="sVal" placeholder="Search">
-            <button  name="fromIndex" class = "button bHover" type="submit">Rep!</button>
+            <button  name="fromIndex" class = "button bHover" type="submit">Find!</button>
         </form>  
         
     </div>

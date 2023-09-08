@@ -26,16 +26,19 @@ class post:
         self.cached = cached
     def __str__(self):
         return f'Post name is {self.title} with rating {self.rating} Link: {self.url} id: {self.url}\n'
-    
+    def id(self):
+        print(self.post_id)
+
 def get_data_if_exist(p_key):
     from databases.dataModels import Product
     record = Product.query.get(p_key)
     
     if record is not None:
-        return record.score
+        print("found", p_key)
+        return (True,record.score)
     else:
         print("not found", p_key)
-        return False
+        return (False, 0)
     
 def sortRating(s):
     return s.rating
@@ -48,21 +51,23 @@ def getRating(comments):
     return rating
 def addToPosts(p_data):
 #look for cached data
-    cached= True
-    rating = get_data_if_exist(p_data.id)    
-    if rating == False:
+    
+    rating = get_data_if_exist(p_data.id) 
+    
+    if rating[0] == False:
+        
         print("getting ratings", p_data.id)
-        rating = getRating(p_data.comments)
-        cached = False
-        print("not cached")
+        rating = (False,getRating(p_data.comments))
+        
+        print("rating obtained")
     #add to processed post
     
     post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
-                        rating, 
+                        rating[1], 
                         p_data.title, 
                         p_data.url, 
                         p_data.id, 
-                        cached))
+                        rating[0]))
 
     
 def searchItem(db,prompt):
@@ -76,11 +81,11 @@ def searchItem(db,prompt):
     #grabs posts based on prompt
     for i in r.subreddit("FashionReps").search(query=prompt,
                                                     sort="relevance", 
-                                                    limit=24, 
+                                                    limit=50, 
                                                     time_filter= "year"):
         total_post_list.append(i)
     #add first 6 posts
-    print("looked for posts")
+    print("looked for posts", len(total_post_list))
     for s in total_post_list[:6]:
         addToPosts(s)
         
