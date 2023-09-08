@@ -43,12 +43,21 @@ def get_data_if_exist(p_key):
 def sortRating(s):
     return s.rating
 
-def getRating(comments):   
+def getRating(prpost):   
     rating = 0
-    comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
-    for comment in comments:
-        rating += sentiment_scores(comment.body)
+    sentrating = 0
+    sentnum = 0
+    prpost.comments.replace_more(limit=None) #replace all unloaded comment obj with loaded comments
+    # rating from the comment lin reg
+    baserate = linreg(prpost)
+    for comment in prpost.comments:
+        sentrating += sentiment_scores(comment.body)
+        sentnum = sentnum + 1
+    rating = baserate * (1 + (sentrating / sentnum))
     return rating
+
+
+
 def addToPosts(p_data):
 #look for cached data
     
@@ -57,9 +66,11 @@ def addToPosts(p_data):
     if rating[0] == False:
         
         print("getting ratings", p_data.id)
-        rating = (False,getRating(p_data.comments))
+        rating = (False,getRating(p_data))
         
         print("rating obtained")
+    #add to processed post
+        print("not cached")
     #add to processed post
     
     post_list.append(post("https://www.reddit.com"+ p_data.permalink, 
@@ -72,9 +83,7 @@ def addToPosts(p_data):
     
 def searchItem(db,prompt):
 
-    
-    
-    #purge old processed_ids and posts
+    # purge old processed_ids and posts
     
     post_list.clear()
     total_post_list.clear()
