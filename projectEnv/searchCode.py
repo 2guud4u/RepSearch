@@ -58,7 +58,6 @@ def getRating(prpost):
     # temp checks
     print("base", baserate)
     print("sentimentrating", sentimentrating/sentind)
-    
     return rating
 
 
