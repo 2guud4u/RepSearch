@@ -1,0 +1,134 @@
+Metadata-Version: 2.1
+Name: openxlab
+Version: 0.0.23
+Summary: openxlab tools
+Project-URL: repository, https://github.com/xxx/xxxx
+Author: Openxlab Contributors
+Author-email: openxlab@example.com
+License: Apache License 2.0
+Keywords: ai,openxlab
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Requires-Dist: oss2~=2.17.0
+Requires-Dist: pytz~=2023.3
+Requires-Dist: pyyaml~=6.0
+Requires-Dist: requests~=2.28.2
+Requires-Dist: rich~=13.4.2
+Requires-Dist: setuptools~=60.2.0
+Requires-Dist: tqdm~=4.65.0
+Provides-Extra: test
+Description-Content-Type: text/markdown
+
+# openxlab-cli
+
+## Getting started
+
+### 代码结构
+
+```
+├─openxlab
+│  ├─config                存放通用配置
+│  ├─demo                  给出的一个demo，模型中心，应用中心可以创建自己的文件夹
+│  ├─types     通用参数定义
+│  ├─utils     存放通用方法
+│  ├─xlab     主站逻辑
+```
+
+### 架构说明
+
+types 中定义定义命令基类
+
+- sub_command_list  填入下一级命令对应的类定义
+- add_args          用于添加当前命令的参数  --xxx
+- take_action   用于定义当前命令的行为，未实现默认使用 argparse 的 help
+
+命令继承基类实现，通过 sub_command_list 实现多级子命令
+
+### 本地测试
+
+```
+ python -m openxlab.cli
+ python -m openxlab.cli  demo help  
+ python -m openxlab.cli  demo upload
+```
+
+### testpypi 联调
+
+```
+修改 config -> version.py 的版本 +1
+
+pip install build
+
+打包，  命令将生成一个 dist 目录
+python -m build
+
+本地安装
+pip install .\dist\openxlab-0.0.7-py3-none-any.whl
+
+# 上传 pip 包到 test pypi
+twine upload --repository testpypi dist/*
+
+# 从 test pypi 下载
+pip install -i https://test.pypi.org/simple/ openxlab==0.0.1
+
+从 test pypi 更新
+pip install -i https://test.pypi.org/simple/ -U openxlab
+```
+
+### ak和sk的设置
+设置ak，sk的有一下几种方法，任选一种即可：
+
+1. 本地使用python -m openxlab.cli config命令调试，按照提示输入对应的access key和secret access key。完成后会在~/.openxlab目录下生成config.json文件，格式如下：
+
+    ```json
+    {
+        "ak": "xxx",
+        "sk": "xxx"
+    }
+    ```
+
+2. 直接在~/.openxlab目录下创建对应的config.json文件，格式如上。
+3. 设置环境变量。可以将access key设置到名为OPENXLAB_AK的环境变量下，secret access key设置到名为OPENXLAB_SK的环境变量下。
+
+
+### token的获取
+在设置好ak和sk之后，业务方可以调用openxlab.xlab.handler.user_token.get_jwt方法获得token。
+
+```python
+def get_jwt(ak=None, sk=None):
+    return get_token(ak, sk).jwt
+```
+
+该方法拥有ak和sk两个可选参数，允许业务方调用该方法时传递ak和sk。ak和sk生效的优先级如下：
+
+```
+get_jwt方法中的ak和sk参数(如果不为空） > ~/.openxlab/config.json文件 > OPENXLAB_AK和OPENXLAB_SK环境变量。   
+```
+
+如果上面三者都为空，则在调用get_jwt方法时会抛出异常如下：
+
+```python
+ValueError("Local config must not be empty before get token via api. "
+                         "Please use the 'openxlab config' command to set the config")
+```
+
+get_jwt方法调用成功后，会在~/.openxlab目录下生成token.json文件，格式如下：
+
+```json
+{
+    "expiration": "2023-05-16 16:29:03",
+    "jwt": "Bearer eyJxxx",
+    "refresh_expiration": "2023-05-23 15:29:03",
+    "refresh_time": "2023-05-16 15:29:03",
+    "refresh_token": "Bearer eyJxxx",
+    "sso_uid": "xxx"
+}
+```
+# Change Log
+
+
+## v0.1.0 
+
+- Release the initial version

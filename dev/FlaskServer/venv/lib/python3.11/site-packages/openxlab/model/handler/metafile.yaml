@@ -1,0 +1,75 @@
+Collections:
+  - Name: Faster_RCNN
+    License: apache-2.0
+    Code:
+      URL: https://github.com/example/Faster_RCNN
+      Version: 1.0
+    Paper:
+      URL: https://arxiv.org/abs/1506.01497
+      Title: 'Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks'
+    README: https://github.com/example/Faster_RCNN#readme
+    Tags:
+      - Object Detection
+      - Computer Vision
+    Frameworks: TensorFlow, PyTorch
+    Metadata:
+      Training Data: COCO Dataset
+      Epochs: 50
+      Batch Size: 32
+      Training Techniques:
+        - Transfer Learning
+        - Data Augmentation
+      Training Resources: NVIDIA V100 GPU
+      FLOPs: 35.7 billion
+      Parameters: 31.4 million
+      Training Time: 2 days
+      Train time: 5 seconds per iteration
+      Training Memory: 16 GB
+      Architecture:
+        - Convolutional Neural Network
+        - Region Proposal Network
+
+Models:
+  - Name: Faster_RCNN_v1
+    In Collection: Faster_RCNN
+    Results:
+      - Task: Object Detection
+        Dataset: COCO Dataset
+        Metrics:
+          - mAP: 0.68
+          - FPS: 10
+    Weights: sam_vit_h_4b8939.pth
+    Training Log: https://example.com/models/Faster_RCNN_v1_training.log
+    Config: https://example.com/models/Faster_RCNN_v1_config.yaml
+    Metadata:
+      Training Data: COCO Dataset
+      Epochs: 50
+      Batch Size: 32
+      Training Techniques:
+        - Transfer Learning
+        - Data Augmentation
+      Training Resources: NVIDIA V100 GPU
+      FLOPs: 35.7 billion
+      Parameters: 31.4 million
+      Training Time: 2 days
+      Train time: 5 seconds per iteration
+      Training Memory: 16 GB
+      Architecture:
+        - Convolutional Neural Network
+        - Region Proposal Network
+      Inference Time:
+        value: 0.1s
+        hardware: NVIDIA Tesla T4
+        backend: TensorRT
+        batch size: 1
+        model: Faster_RCNN_v1
+        resolution: (720, 1280)
+    Paper:
+      URL: https://arxiv.org/abs/1506.01497
+      Title: 'Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks'
+      Image: https://example.com/models/Faster_RCNN_v1_image.jpg
+      Code: https://github.com/example/Faster_RCNN/tree/v1
+      Alias: FRv1
+      Language: Python
+    README: https://github.com/example/Faster_RCNN/tree/v1#readme
+

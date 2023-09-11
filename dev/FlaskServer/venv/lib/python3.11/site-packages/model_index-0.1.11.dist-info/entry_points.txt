@@ -1,0 +1,4 @@
+
+        [console_scripts]
+        mi=modelindex.__main__:cli
+    
