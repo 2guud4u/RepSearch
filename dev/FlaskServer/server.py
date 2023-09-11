@@ -55,7 +55,7 @@ def results():
            
     for r in result:
          print(r)
-    return jsonify(result[0].serialize())
+    return Response(json.dumps([r.serialize() for r in result]),  mimetype='application/json')
 
 
 
