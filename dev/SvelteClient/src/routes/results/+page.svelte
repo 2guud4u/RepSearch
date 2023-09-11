@@ -12,7 +12,15 @@
     onMount(() => {
         console.log("searchquery: " + searchquery);
     });
+    function getRand() {
+        fetch("http://127.0.0.1:5000/search")
+        .then(d => d.text())
+        .then(d => (rand = d));
+    }
+    let rand = ""
 </script>
 <h1>Results loading page</h1>
 <h2> Search for {searchquery}</h2>
+<button on:click={getRand}>Get a random number</button>
+<div>hi{rand}</div>
 

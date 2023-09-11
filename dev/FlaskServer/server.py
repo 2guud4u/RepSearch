@@ -32,7 +32,7 @@ def serialize(self):
                 "cached": self.cached}
 
  
-@app.route("/results", methods=['GET', 'POST'])#search results
+@app.route("/search", methods=['GET', 'POST'])#search results
 def results():
     #down here to avoid circular imports
     from databases.dataModels import Product
@@ -40,16 +40,14 @@ def results():
     with app.app_context():
         db.create_all()
     info = session.get('form_data')
-    if "fromIndex" in info:
+    
         
-            searchVal = info.get("sVal")
-            
-            result=searchItem(db, searchVal)
-            #if no results
-            if len(result) == 0:
-                return render_template("empty.html", searchVal=searchVal)
-    if "fromResults" in request.form:
-        result = loadMore()
+    searchVal = "dog"
+    
+    result=searchItem(db, searchVal)
+    #if no results
+    
+    
     
             
            
