@@ -8,6 +8,7 @@ import glob
 import time
 from flask_cors import CORS
 import json
+from urllib.parse import unquote
 
 # logging.basicConfig()
 # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
@@ -32,19 +33,15 @@ def serialize(self):
                 "cached": self.cached}
 
  
-@app.route("/search", methods=['GET', 'POST'])#search results
-def results():
+@app.route("/search/<searchVal>", methods=['GET', 'POST'])#search results
+def results(searchVal):
     #down here to avoid circular imports
     from databases.dataModels import Product
     
     with app.app_context():
         db.create_all()
-    info = session.get('form_data')
     
-        
-    searchVal = "dog"
-    
-    result=searchItem(db, searchVal)
+    result=searchItem(db, unquote(searchVal))
     #if no results
     
     

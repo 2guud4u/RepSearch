@@ -2,15 +2,6 @@
     import {goto, beforeNavigate, afterNavigate} from "$app/navigation";
     import {query} from "../stores";
     import "./index.css"
-    const handleClick = () => {
-        goto('/results')
-    }
-
-    function getRand() {
-        fetch("http://127.0.0.1:5000/rand")
-        .then(d => d.text())
-        .then(d => (rand = d));
-    }
 
     function handleSubmit() {
         query.set(searchVal)
@@ -44,8 +35,6 @@
         
         <div>{searchVal}</div>
         <h1>Your number is {rand}!</h1>
-<button on:click={getRand}>Get a random number</button>
-<button on:click={handleClick}>go</button>
     </div>
 </body>
 

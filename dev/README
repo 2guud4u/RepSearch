@@ -1,0 +1,17 @@
+#FlaskServer
+Get into env with 
+`source venv/bin/activate`
+
+Install dependencies with 
+`pip3 install -r requirements.txt`
+
+Run server with
+`python3 server.py`
+
+
+#SvelteClient
+Download dependencies with
+`npm install` or `bun install`(for chads)
+
+Run client with
+`npm run dev` or `bun run dev`(for chads)

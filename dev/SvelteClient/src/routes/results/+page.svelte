@@ -3,6 +3,7 @@
     import {page} from '$app/stores';
     import {query} from "../../stores";
     import { onMount } from 'svelte';
+    import {goto} from "$app/navigation";
     
     let searchquery = "";
     query.subscribe(val => {
@@ -10,17 +11,26 @@
     });
 
     onMount(() => {
-        console.log("searchquery: " + searchquery);
+        
+        fetch("http://127.0.0.1:5000/search/" + searchquery)
+            .then(response => {
+                if (!response.ok) {
+                    goto('/results/error')
+                    throw new Error("HTTP error " + response.status);
+                   
+                }
+                response.text()})
+            .then(d => (rand = d));
+    
+        
+
+        
     });
-    function getRand() {
-        fetch("http://127.0.0.1:5000/search")
-        .then(d => d.text())
-        .then(d => (rand = d));
-    }
+    
     let rand = ""
 </script>
 <h1>Results loading page</h1>
 <h2> Search for {searchquery}</h2>
-<button on:click={getRand}>Get a random number</button>
-<div>hi{rand}</div>
+<h1>{rand}</h1>
+
 
