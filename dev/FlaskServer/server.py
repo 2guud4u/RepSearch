@@ -62,5 +62,9 @@ def loading():
     
     return render_template("loading.html", gifList=gifList)
 
+@app.route("/<path:path>")
+def svelte_client(path):
+    return send_from_directory('../SvelteClient/src/app.html', path)
+
 if __name__ == "__main__":
     app.run(debug=True)
