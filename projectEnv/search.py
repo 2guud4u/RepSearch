@@ -38,9 +38,3 @@ def linreg(submission):
     int = 5.85
     c = m * submission.score + int
     return(c/sd)
-
-
-
-
-    
-
