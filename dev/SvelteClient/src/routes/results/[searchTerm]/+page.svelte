@@ -6,8 +6,14 @@
     import ItemDisplay from "$lib/components/itemDisplay/itemDisplay.svelte"
     import LoadingCard from "$lib/components/loadingCard/loadingCard.svelte"
     import EmptyCard from '../../../lib/components/emptyCard/emptyCard.svelte';
+	import { onMount } from 'svelte';
     const searchquery = $page.params.searchTerm; 
-    let promise = getItems(searchquery);
+    let promise;
+    onMount(async()=>
+    {
+        promise = await getItems(searchquery);
+    });
+    
     
 </script>
 <html lang="en">
@@ -19,20 +25,18 @@
 
 </head>
 <body>
-    
-        {#await promise}
-            <LoadingCard/>
-        {:then data}
-            {#if data.length == 0}
-                <EmptyCard/>
-            {:else}
-                <ItemDisplay items={data}/>
-            {/if}
-            
-            
-        {:catch error}
+    {#if promise === undefined}
+        <LoadingCard/>
+    {:else}
+
+        {#if promise.length == 0}
             <EmptyCard/>
-        {/await}
+        {:else}
+            <ItemDisplay items={promise}/>
+        {/if}
+        
+    {/if}
+        
     
    
 </body>
