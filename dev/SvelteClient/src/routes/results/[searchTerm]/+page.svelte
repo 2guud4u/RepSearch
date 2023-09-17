@@ -1,16 +1,51 @@
 <script>
+	export const product_id = 10;
     import {page} from '$app/stores';
-    import "./results.css";
-    import {results} from "../../../stores";
-    // let result = []
-    // results.subscribe(val => {
-    //     result = val;
-    //     console.log(result);
-    // });
-    export let data;
-    console.log(data);
-    let jsondata = JSON.parse(data.result);
+    // import {query, results} from "../../../stores";
+    import { onMount } from 'svelte';
+    import {goto} from "$app/navigation";
+    import "./loading.css";
+    import {getItems} from "./util"
+    import ItemDisplay from "$lib/components/itemDisplay/itemDisplay.svelte"
+    import TestComp  from '../../../lib/components/testComp/testComp.svelte';
     
+    function goback(){
+        controller.abort();
+        goto('/')
+    }
+    //let searchquery = "";
+    //updates searchquery
+    // query.subscribe(val => {
+    //     searchquery = val;
+    // });
+    const searchquery = $page.params.searchTerm;
+    // for cancling fetch
+    const controller = new AbortController();
+    const signal = controller.signal;
+    let promise = getItems(searchquery);
+    onMount(() => {
+        
+        });
+        let randomGifUrl = "";
+        function displayRandomGif() {
+            
+            // Get a random index from the gifList array
+            let randomIndex = Math.floor(Math.random() * 9);
+            
+            // Get the random GIF URL
+            randomGifUrl = "./catgifs/cat" + str(randomIndex) + ".gif";
+            
+            // Update the src attribute of the img element with the random GIF URL
+            
+        }
+
+        // Call the displayRandomGif function initially
+        //displayRandomGif();
+        
+        // Call the displayRandomGif function every 10 seconds
+        // setInterval(displayRandomGif, 5);
+    
+    let rand = ""
 </script>
 <html lang="en">
 <head>
@@ -18,44 +53,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qc Results</title>
+
 </head>
-{#if data.result}
 <body>
-    <div class="banner"> 
+    
+        {#await promise}
+        <div class="gif-container center">
+        <img id="random-gif" src="{randomGifUrl}" alt="Random GIF">
+        <p> Here are some cats while you wait for your results!</p>
         
-        <div  id="goBack">Go Back</div>
-        <h1 id="title">Search Results</h1>
+            <button on:click={goback} class="button">Cancel</button>
+    
         </div>
-        <div class="search-container">
-        <div class="product-row">
-        {#each jsondata as product}
-         <div class="product">
-            <div class="product-top">
-                <h2 class="product-title">{product.title}</h2>
-                <button class="toggle-button" onclick="toggleTitle(this)">...</button>
-            </div>
-            <p class="product-middle" id="rating">Rating:{product.rating}</p>
-            <div class="product-bottom">
-                <div class="button-container">
-                    <a  href="{product.url}" target="_blank" rel="noopener noreferrer">
-                        <button class="reddit">Reddit</button>
-                    </a>
-                    <a href="{product.url}" target="_blank" rel="noopener noreferrer">
-                        <button class="wtc">WTC</button>
-                    </a>
-                </div>
-            </div>
-         </div>
-        
-        <div>&nbsp;</div>
-        {/each}
-    </div>
-        <form class="button-container2"  method="post">
-            <button  name="fromResults" id="load-more">Load More</button>
-        </form>
-   </div>
-   <p id="end">End of Search Results</p>
+        {:then data}
+            <ItemDisplay items={data}/>
+        {:catch error}
+            <div>error{error.message}</div>
+        {/await}
+    
    
 </body>
-{/if}
 </html>
+<style>
+    
+</style>
+
+

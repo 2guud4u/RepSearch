@@ -1,7 +1,6 @@
 import re
 import praw
 
-import matplotlib.pyplot as plt
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def sentiment_scores(comment_body):

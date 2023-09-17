@@ -5,7 +5,7 @@
 
     function handleSubmit() {
         query.set(searchVal)
-        goto('/results')
+        goto('/results/'+searchVal)
     }
 
    
