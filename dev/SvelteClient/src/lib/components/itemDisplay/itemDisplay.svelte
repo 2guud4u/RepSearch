@@ -1,8 +1,13 @@
 <script>
     import ItemCard from '$lib/components/itemCard/itemCard.svelte';
     import "./itemDisplay.css";
+    import {goto} from "$app/navigation";
+    function goback(){
+        goto('/')
+    }
     export let items;
-    //let jsondata = JSON.parse(items.result);
+    
+
     
 </script>
 <html lang="en">
@@ -15,7 +20,7 @@
 <body>
     <div class="banner"> 
         
-        <div  id="goBack">Go Back</div>
+        <button on:click={goback} id="goback">Go Back</button>
         <h1 id="title">Search Results</h1>
         </div>
         <div class="search-container">

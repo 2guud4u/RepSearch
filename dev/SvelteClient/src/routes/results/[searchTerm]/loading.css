@@ -1,8 +1,4 @@
-body {
-   background-color:rgb(240, 237, 237);
-    background-size: cover;
-    color: white;
-}
+
 .gif-container {
     display: flex;
     flex-direction: column;
