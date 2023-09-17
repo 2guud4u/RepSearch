@@ -1,0 +1,43 @@
+
+.center {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+img {
+    max-width: 20em;
+    height: auto;
+}
+
+.empty-button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  width: 120px;
+  cursor: pointer;
+  margin: 5px;
+  animation: aura 5s infinite;
+}
+
+@keyframes aura {
+  0% { background-color: #c33232; }
+  20% { background-color: #f1f436; }
+  40% { background-color: #62e20d; }
+  60% { background-color: #3bfffc; }
+  80% { background-color: #514caf; }
+  100% { background-color: #a34caf; }
+}
+
+.button:hover {
+  animation: none;
+}

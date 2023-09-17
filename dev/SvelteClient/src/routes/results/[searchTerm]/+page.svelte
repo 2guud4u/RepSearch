@@ -5,7 +5,7 @@
     import {getItems} from "./util"
     import ItemDisplay from "$lib/components/itemDisplay/itemDisplay.svelte"
     import LoadingCard from "$lib/components/loadingCard/loadingCard.svelte"
-
+    import EmptyCard from '../../../lib/components/emptyCard/emptyCard.svelte';
     const searchquery = $page.params.searchTerm; 
     let promise = getItems(searchquery);
     
@@ -23,9 +23,15 @@
         {#await promise}
             <LoadingCard/>
         {:then data}
-            <ItemDisplay items={data}/>
+            {#if data.length == 0}
+                <EmptyCard/>
+            {:else}
+                <ItemDisplay items={data}/>
+            {/if}
+            
+            
         {:catch error}
-            <div>error{error.message}</div>
+            <EmptyCard/>
         {/await}
     
    

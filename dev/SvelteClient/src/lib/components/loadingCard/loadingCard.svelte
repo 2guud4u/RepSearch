@@ -17,6 +17,6 @@
     <img id="random-gif" src="{randomGifUrl}" alt="Random GIF">
     <p style="color:white;"> Here are some cats while you wait for your results!</p>
     
-        <button on:click={goback} class="button">Cancel</button>
+        <button on:click={goback} class="loading-button">Cancel</button>
 
 </div>

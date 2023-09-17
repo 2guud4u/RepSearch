@@ -11,7 +11,7 @@
     max-height: 80%;
     object-fit: cover;
   }
-  .button {
+  .loading-button {
     display: inline-block;
     border-radius: 4px;
     background-color: #4CAF50;
