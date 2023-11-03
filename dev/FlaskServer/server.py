@@ -33,7 +33,7 @@ def serialize(self):
                 "cached": self.cached}
 
  
-@app.route("/search/<searchVal>", methods=['GET', 'POST'])#search results
+@app.route("/search/<searchVal>", methods=['GET'])#search results
 def results(searchVal):
     #down here to avoid circular imports
     from databases.dataModels import Product
@@ -43,15 +43,15 @@ def results(searchVal):
     
     result=searchItem(db, unquote(searchVal))
     #if no results
-    
-    
-    
-            
-           
-    for r in result:
-         print(r)
     return Response(json.dumps([r.serialize() for r in result]),  mimetype='application/json')
 
+@app.route("/loadMore/<searchId>",methods=['GET'])
+def loadMoreResults():
+    from databases.dataModels import Product
+    with app.app_context():
+        db.create_all()
+    result=loadMore(db, searchId)
+    return Response(json.dumps([r.serialize() for r in result]),  mimetype='application/json')
 
 
 

@@ -87,7 +87,12 @@ def addToPosts(p_data):
                         p_data.id, 
                         rating[0]))
 
-    
+def getPost(prompt):
+    return r.subreddit("FashionReps").search(query=prompt,
+                                                    sort="relevance", 
+                                                    limit=50, 
+                                                    time_filter= "year")
+
 def searchItem(db,prompt):
 
     # purge old processed_ids and posts
